@@ -1,9 +1,7 @@
-import React, { useContext } from 'react'
+import React, { useContext } from "react"
+import StoreContext from "../../context/store-context"
 
-import StoreContext from '~/context/StoreContext'
-import { Wrapper } from './styles'
-
-const LineItem = props => {
+const CartLineItem = props => {
   const { line_item } = props
   const {
     removeLineItem,
@@ -29,20 +27,20 @@ const LineItem = props => {
   }
 
   return (
-    <Wrapper>
+    <div>
       {variantImage}
       <p>
         {line_item.title}
         {`  `}
-        {line_item.variant.title === !'Default Title'
+        {line_item.variant.title === !"Default Title"
           ? line_item.variant.title
-          : ''}
+          : ""}
       </p>
       {selectedOptions}
       {line_item.quantity}
       <button onClick={handleRemove}>Remove</button>
-    </Wrapper>
+    </div>
   )
 }
 
-export default LineItem
+export default CartLineItem
