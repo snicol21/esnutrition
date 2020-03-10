@@ -1,9 +1,7 @@
-import React, { useState, useContext, useEffect, useCallback } from 'react'
-import find from 'lodash/find'
-import isEqual from 'lodash/isEqual'
-import PropTypes from 'prop-types'
-
-import StoreContext from '~/context/StoreContext'
+import React, { useState, useContext, useEffect, useCallback } from "react"
+import isEqual from "lodash/isEqual"
+import PropTypes from "prop-types"
+import StoreContext from "../../context/store-context"
 
 const ProductForm = ({ product }) => {
   const {
@@ -35,7 +33,7 @@ const ProductForm = ({ product }) => {
         }
       })
     },
-    [client.product, productVariant.shopifyId, variants]
+    [client.product, productVariant.shopifyId]
   )
 
   useEffect(() => {
@@ -55,7 +53,7 @@ const ProductForm = ({ product }) => {
       value,
     }
 
-    const selectedVariant = find(variants, ({ selectedOptions }) =>
+    const selectedVariant = variants.find(({ selectedOptions }) =>
       isEqual(currentOptions, selectedOptions)
     )
 
@@ -76,13 +74,15 @@ const ProductForm = ({ product }) => {
   at least if the have a sense for good design lol.
   */
   const checkDisabled = (name, value) => {
-    const match = find(variants, {
-      selectedOptions: [
-        {
-          name: name,
-          value: value,
-        },
-      ],
+    const match = variants.find(() => {
+      return {
+        selectedOptions: [
+          {
+            name: name,
+            value: value,
+          },
+        ],
+      }
     })
     if (match === undefined) return true
     if (match.availableForSale === true) return false
@@ -92,7 +92,7 @@ const ProductForm = ({ product }) => {
   const price = Intl.NumberFormat(undefined, {
     currency: minVariantPrice.currencyCode,
     minimumFractionDigits: 2,
-    style: 'currency',
+    style: "currency",
   }).format(variant.price)
 
   return (
@@ -104,7 +104,7 @@ const ProductForm = ({ product }) => {
           <select
             name={name}
             key={id}
-            onChange={event => handleOptionChange(index, event)}
+            onBlur={event => handleOptionChange(index, event)}
           >
             {values.map(value => (
               <option

@@ -1,7 +1,6 @@
-import React, { useContext } from 'react'
-
-import StoreContext from '~/context/StoreContext'
-import LineItem from './LineItem'
+import React, { useContext } from "react"
+import StoreContext from "../../context/store-context"
+import CartLineItem from "./cart-line-item"
 
 const Cart = () => {
   const {
@@ -13,7 +12,7 @@ const Cart = () => {
   }
 
   const line_items = checkout.lineItems.map(line_item => {
-    return <LineItem key={line_item.id.toString()} line_item={line_item} />
+    return <CartLineItem key={line_item.id.toString()} line_item={line_item} />
   })
 
   return (

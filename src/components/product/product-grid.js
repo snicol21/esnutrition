@@ -1,9 +1,7 @@
-import React, { useContext } from 'react'
-import { useStaticQuery, graphql, Link } from 'gatsby'
-
-import StoreContext from '~/context/StoreContext'
-import { Grid, Product, Title, PriceTag } from './styles'
-import { Img } from '~/utils/styles'
+import React, { useContext } from "react"
+import { useStaticQuery, graphql, Link } from "gatsby"
+import StoreContext from "../../context/store-context"
+import Img from "gatsby-image"
 
 const ProductGrid = () => {
   const {
@@ -42,13 +40,13 @@ const ProductGrid = () => {
 
   const getPrice = price =>
     Intl.NumberFormat(undefined, {
-      currency: checkout.currencyCode ? checkout.currencyCode : 'USD',
+      currency: checkout.currencyCode ? checkout.currencyCode : "USD",
       minimumFractionDigits: 2,
-      style: 'currency',
+      style: "currency",
     }).format(parseFloat(price ? price : 0))
 
   return (
-    <Grid>
+    <div>
       {allShopifyProduct.edges ? (
         allShopifyProduct.edges.map(
           ({
@@ -60,7 +58,7 @@ const ProductGrid = () => {
               variants: [firstVariant],
             },
           }) => (
-            <Product key={id}>
+            <div key={id}>
               <Link to={`/product/${handle}/`}>
                 {firstImage && firstImage.localFile && (
                   <Img
@@ -69,15 +67,15 @@ const ProductGrid = () => {
                   />
                 )}
               </Link>
-              <Title>{title}</Title>
-              <PriceTag>{getPrice(firstVariant.price)}</PriceTag>
-            </Product>
+              <div>{title}</div>
+              <div>{getPrice(firstVariant.price)}</div>
+            </div>
           )
         )
       ) : (
         <p>No Products found!</p>
       )}
-    </Grid>
+    </div>
   )
 }
 

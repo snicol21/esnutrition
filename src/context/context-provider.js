@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import Client from 'shopify-buy'
-
-import Context from '~/context/StoreContext'
+import React, { useState, useEffect } from "react"
+import Client from "shopify-buy"
+import StoreContext from "./store-context"
 
 const client = Client.buildClient({
   storefrontAccessToken: process.env.GATSBY_SHOPIFY_ACCESS_TOKEN,
@@ -22,14 +21,14 @@ const ContextProvider = ({ children }) => {
   useEffect(() => {
     const initializeCheckout = async () => {
       // Check for an existing cart.
-      const isBrowser = typeof window !== 'undefined'
+      const isBrowser = typeof window !== "undefined"
       const existingCheckoutID = isBrowser
-        ? localStorage.getItem('shopify_checkout_id')
+        ? localStorage.getItem("shopify_checkout_id")
         : null
 
       const setCheckoutInState = checkout => {
         if (isBrowser) {
-          localStorage.setItem('shopify_checkout_id', checkout.id)
+          localStorage.setItem("shopify_checkout_id", checkout.id)
         }
 
         updateStore(prevState => {
@@ -49,7 +48,7 @@ const ContextProvider = ({ children }) => {
             return
           }
         } catch (e) {
-          localStorage.setItem('shopify_checkout_id', null)
+          localStorage.setItem("shopify_checkout_id", null)
         }
       }
 
@@ -61,12 +60,12 @@ const ContextProvider = ({ children }) => {
   }, [store.client.checkout])
 
   return (
-    <Context.Provider
+    <StoreContext.Provider
       value={{
         store,
         addVariantToCart: (variantId, quantity) => {
-          if (variantId === '' || !quantity) {
-            console.error('Both a size and quantity are required.')
+          if (variantId === "" || !quantity) {
+            console.error("Both a size and quantity are required.")
             return
           }
 
@@ -114,7 +113,7 @@ const ContextProvider = ({ children }) => {
       }}
     >
       {children}
-    </Context.Provider>
+    </StoreContext.Provider>
   )
 }
 export default ContextProvider
