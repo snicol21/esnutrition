@@ -4,5 +4,8 @@
   "files.associations": {
     "*.js": "javascriptreact"
   },
-  "prettier.configPath": ".prettierrc"
+  "prettier.configPath": ".prettierrc",
+  "cSpell.words": [
+    "shopify"
+  ]
 }
