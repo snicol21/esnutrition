@@ -8,8 +8,8 @@
 // Containers
 //==============================================================================
 
-$x-small: 600px !default;
-$small: 800px !default;
+$x-small: 589px !default;
+$small: 819px !default;
 $medium: 1000px !default;
 $large: 1200px !default;
 
@@ -25,7 +25,7 @@ $desktop: $medium !default;
 // Global Colors
 //==============================================================================
 
-$background: white !default;
+$background: #000 !default;
 $primary-color: #5f98ff !default;
 $secondary-color: #29de7d !default;
 $accent-color: #cdcdcd !default;
@@ -56,7 +56,7 @@ $gray-600: #515353;
 //==============================================================================
 // Typography
 //==============================================================================
-@import url("https://fonts.googleapis.com/css?family=Domine|Open+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Montserrat|Poppins&display=swap");
 
 // Body
 $font-size: 1rem !default;
@@ -65,13 +65,14 @@ $font-style: normal !default;
 $font-variant: normal !default;
 $font-weight: normal !default;
 $font-color: $off-black !default;
-$font-family: "Open Sans", "sans-serif" !default;
+$font-family: "Montserrat", "HelveticaNeue", "Helvetica Neue", "sans-serif" !default;
 $line-height: 1.6 !default;
 
 // Headings
 $heading-font-color: $off-black !default;
 $heading-font-weight: 600 !default;
-$heading-font-family: "Domine", "serif" !default;
+$heading-font-family: "Montserrat", "HelveticaNeue", "Helvetica Neue",
+  "sans-serif" !default;
 $heading-line-height: 1.2 !default;
 
 // Mobile heading font size

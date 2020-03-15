@@ -22,15 +22,15 @@
 @mixin base-width {
   margin-left: auto;
   margin-right: auto;
-  width: 80%;
+  padding: 0 40px;
   @include small-breakpoint {
-    width: 70%;
+    padding: 0 40px;
   }
   @include medium-breakpoint {
-    width: 60%;
+    padding: 0 40px;
   }
   @include large-breakpoint {
-    width: 50%;
+    padding: 0 40px;
   }
 }
 
@@ -199,6 +199,13 @@
   @include flex(flex);
   @include flex_align_items(center);
   @include flex_justify(flex-start);
+  @include flex_wrap(wrap);
+}
+
+@mixin flex_end() {
+  @include flex(flex);
+  @include flex_align_items(center);
+  @include flex_justify(flex-end);
   @include flex_wrap(wrap);
 }
 
