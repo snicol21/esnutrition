@@ -1,1 +1,1 @@
-//import "./src/scss/main.scss"
+import "./src/styles/tailwind.css"

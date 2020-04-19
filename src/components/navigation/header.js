@@ -17,20 +17,14 @@ const Header = ({ siteTitle }) => {
 
   return (
     <header>
-      <div className="header">
-        <div className="left">
-          <Link to="/" className="link">
-            {siteTitle}
-          </Link>
-          <Link to="/collections/supplements" className="link">
-            Supplements
-          </Link>
-          <Link to="/collections/gear" className="link">
-            Gear
-          </Link>
+      <div>
+        <div>
+          <Link to="/">{siteTitle}</Link>
+          <Link to="/collections/supplements">Supplements</Link>
+          <Link to="/collections/gear">Gear</Link>
         </div>
-        <div className="right">
-          <Link to="/cart" className="link cart">
+        <div>
+          <Link to="/cart">
             Cart
             {hasItems && <span>{quantity}</span>}
           </Link>
