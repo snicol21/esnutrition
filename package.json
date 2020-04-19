@@ -34,6 +34,7 @@
     "shopify-buy": "^2.8.0"
   },
   "devDependencies": {
+    "autoprefixer": "^9.7.6",
     "prettier": "^1.19.1",
     "tailwindcss": "^1.2.0"
   }
