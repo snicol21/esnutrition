@@ -13,18 +13,12 @@ const ProductPage = ({ data }) => {
         <div>
           <div>
             {product.images.map(image => (
-              <Img
-                fluid={image.localFile.childImageSharp.fluid}
-                key={image.id}
-                alt={product.title}
-              />
+              <Img fluid={image.localFile.childImageSharp.fluid} key={image.id} alt={product.title} />
             ))}
           </div>
           <div>
             <div>{product.title}</div>
-            <div
-              dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
-            ></div>
+            <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}></div>
             <ProductForm product={product} />
           </div>
         </div>

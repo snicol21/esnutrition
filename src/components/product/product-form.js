@@ -17,17 +17,14 @@ const ProductForm = ({ product }) => {
     store: { client, adding },
   } = useContext(StoreContext)
 
-  const productVariant =
-    client.product.helpers.variantForOptions(product, variant) || variant
+  const productVariant = client.product.helpers.variantForOptions(product, variant) || variant
   const [available, setAvailable] = useState(productVariant.availableForSale)
 
   const checkAvailability = useCallback(
     productId => {
       client.product.fetch(productId).then(fetchedProduct => {
         // this checks the currently selected variant for availability
-        const result = fetchedProduct.variants.filter(
-          variant => variant.id === productVariant.shopifyId
-        )
+        const result = fetchedProduct.variants.filter(variant => variant.id === productVariant.shopifyId)
         if (result.length > 0) {
           setAvailable(result[0].available)
         }
@@ -53,9 +50,7 @@ const ProductForm = ({ product }) => {
       value,
     }
 
-    const selectedVariant = variants.find(({ selectedOptions }) =>
-      isEqual(currentOptions, selectedOptions)
-    )
+    const selectedVariant = variants.find(({ selectedOptions }) => isEqual(currentOptions, selectedOptions))
 
     setVariant({ ...selectedVariant })
   }
@@ -101,17 +96,9 @@ const ProductForm = ({ product }) => {
       {options.map(({ id, name, values }, index) => (
         <React.Fragment key={id}>
           <label htmlFor={name}>{name} </label>
-          <select
-            name={name}
-            key={id}
-            onBlur={event => handleOptionChange(index, event)}
-          >
+          <select name={name} key={id} onBlur={event => handleOptionChange(index, event)}>
             {values.map(value => (
-              <option
-                value={value}
-                key={`${name}-${value}`}
-                disabled={checkDisabled(name, value)}
-              >
+              <option value={value} key={`${name}-${value}`} disabled={checkDisabled(name, value)}>
                 {value}
               </option>
             ))}
@@ -120,21 +107,9 @@ const ProductForm = ({ product }) => {
         </React.Fragment>
       ))}
       <label htmlFor="quantity">Quantity </label>
-      <input
-        type="number"
-        id="quantity"
-        name="quantity"
-        min="1"
-        step="1"
-        onChange={handleQuantityChange}
-        value={quantity}
-      />
+      <input type="number" id="quantity" name="quantity" min="1" step="1" onChange={handleQuantityChange} value={quantity} />
       <br />
-      <button
-        type="submit"
-        disabled={!available || adding}
-        onClick={handleAddToCart}
-      >
+      <button type="submit" disabled={!available || adding} onClick={handleAddToCart}>
         Add to Cart
       </button>
       {!available && <p>This Product is out of Stock!</p>}

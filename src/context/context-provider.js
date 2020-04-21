@@ -22,9 +22,7 @@ const ContextProvider = ({ children }) => {
     const initializeCheckout = async () => {
       // Check for an existing cart.
       const isBrowser = typeof window !== "undefined"
-      const existingCheckoutID = isBrowser
-        ? localStorage.getItem("shopify_checkout_id")
-        : null
+      const existingCheckoutID = isBrowser ? localStorage.getItem("shopify_checkout_id") : null
 
       const setCheckoutInState = checkout => {
         if (isBrowser) {
@@ -76,39 +74,29 @@ const ContextProvider = ({ children }) => {
           const { checkout, client } = store
 
           const checkoutId = checkout.id
-          const lineItemsToUpdate = [
-            { variantId, quantity: parseInt(quantity, 10) },
-          ]
+          const lineItemsToUpdate = [{ variantId, quantity: parseInt(quantity, 10) }]
 
-          return client.checkout
-            .addLineItems(checkoutId, lineItemsToUpdate)
-            .then(checkout => {
-              updateStore(prevState => {
-                return { ...prevState, checkout, adding: false }
-              })
+          return client.checkout.addLineItems(checkoutId, lineItemsToUpdate).then(checkout => {
+            updateStore(prevState => {
+              return { ...prevState, checkout, adding: false }
             })
+          })
         },
         removeLineItem: (client, checkoutID, lineItemID) => {
-          return client.checkout
-            .removeLineItems(checkoutID, [lineItemID])
-            .then(res => {
-              updateStore(prevState => {
-                return { ...prevState, checkout: res }
-              })
+          return client.checkout.removeLineItems(checkoutID, [lineItemID]).then(res => {
+            updateStore(prevState => {
+              return { ...prevState, checkout: res }
             })
+          })
         },
         updateLineItem: (client, checkoutID, lineItemID, quantity) => {
-          const lineItemsToUpdate = [
-            { id: lineItemID, quantity: parseInt(quantity, 10) },
-          ]
+          const lineItemsToUpdate = [{ id: lineItemID, quantity: parseInt(quantity, 10) }]
 
-          return client.checkout
-            .updateLineItems(checkoutID, lineItemsToUpdate)
-            .then(res => {
-              updateStore(prevState => {
-                return { ...prevState, checkout: res }
-              })
+          return client.checkout.updateLineItems(checkoutID, lineItemsToUpdate).then(res => {
+            updateStore(prevState => {
+              return { ...prevState, checkout: res }
             })
+          })
         },
       }}
     >
