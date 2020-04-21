@@ -19,14 +19,16 @@ const Layout = ({ children }) => {
         `}
         render={data => (
           <>
-            <Header siteTitle={data.site.siteMetadata.title} />
-            <div>
-              {children}
-              <footer>
-                © {new Date().getFullYear()}, Built with
-                {` `}
-                <a href="https://www.gatsbyjs.org">Gatsby</a>
-              </footer>
+            <div className="bg-black text-white leading-normal tracking-normal max-w-full overflow-x-hidden">
+              <Header siteTitle={data.site.siteMetadata.title} />
+              {/* <div>
+                {children}
+                <footer>
+                  © {new Date().getFullYear()}, Built with
+                  {` `}
+                  <a href="https://www.gatsbyjs.org">Gatsby</a>
+                </footer>
+              </div> */}
             </div>
           </>
         )}

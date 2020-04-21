@@ -8,19 +8,9 @@ const CartLineItem = props => {
     store: { client, checkout },
   } = useContext(StoreContext)
 
-  const variantImage = line_item.variant.image ? (
-    <img
-      src={line_item.variant.image.src}
-      alt={`${line_item.title} product shot`}
-      height="60px"
-    />
-  ) : null
+  const variantImage = line_item.variant.image ? <img src={line_item.variant.image.src} alt={`${line_item.title} product shot`} height="60px" /> : null
 
-  const selectedOptions = line_item.variant.selectedOptions
-    ? line_item.variant.selectedOptions.map(
-        option => `${option.name}: ${option.value} `
-      )
-    : null
+  const selectedOptions = line_item.variant.selectedOptions ? line_item.variant.selectedOptions.map(option => `${option.name}: ${option.value} `) : null
 
   const handleRemove = () => {
     removeLineItem(client, checkout.id, line_item.id)
@@ -32,9 +22,7 @@ const CartLineItem = props => {
       <p>
         {line_item.title}
         {`  `}
-        {line_item.variant.title === !"Default Title"
-          ? line_item.variant.title
-          : ""}
+        {line_item.variant.title === !"Default Title" ? line_item.variant.title : ""}
       </p>
       {selectedOptions}
       {line_item.quantity}

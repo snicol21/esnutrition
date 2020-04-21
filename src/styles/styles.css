@@ -1,5 +1,3 @@
-@tailwind base;
-
+@import "./styles.base.css";
 @tailwind components;
-
 @tailwind utilities;

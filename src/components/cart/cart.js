@@ -27,10 +27,7 @@ const Cart = () => {
       <h2>Total</h2>
       <p>$ {checkout.totalPrice}</p>
       <br />
-      <button
-        onClick={handleCheckout}
-        disabled={checkout.lineItems.length === 0}
-      >
+      <button onClick={handleCheckout} disabled={checkout.lineItems.length === 0}>
         Check out
       </button>
     </div>

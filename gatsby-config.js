@@ -34,7 +34,11 @@ module.exports = {
     {
       resolve: `gatsby-plugin-postcss`,
       options: {
-        postCssPlugins: [require("tailwindcss"), require("autoprefixer")],
+        postCssPlugins: [
+          require("postcss-import"),
+          require("tailwindcss"),
+          require("autoprefixer"),
+        ],
       },
     },
     {
@@ -54,7 +58,7 @@ module.exports = {
         background_color: `#fff`,
         theme_color: `#fff`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`,
+        icon: `src/images/logo-mark-circle-white.jpg`,
       },
     },
   ],
