@@ -5,7 +5,6 @@
     "*.js": "javascriptreact"
   },
   "prettier.configPath": ".prettierrc",
-  "cSpell.words": [
-    "shopify"
-  ]
+  "cSpell.words": ["shopify"],
+  "editor.tabSize": 2
 }
