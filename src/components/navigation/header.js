@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react"
-import PropTypes from "prop-types"
 import { Link } from "gatsby"
 import Img from "gatsby-image"
 import { useStaticQuery, graphql } from "gatsby"
 import StoreContext from "../../context/store-context"
-import { HamburgerSvgPath, CloseSvgPath, ShoppingCartSvgPath } from "../base/SvgPaths"
+import OffCanvasMenu from "../base/OffCanvasMenu"
+import { HamburgerSvgPath, ShoppingCartSvgPath } from "../base/SvgPaths"
 
 const useQuantity = () => {
   const {
@@ -16,8 +16,16 @@ const useQuantity = () => {
 }
 
 const Header = () => {
-  const [isOpen, setOpen] = useState(false)
-  const toggleOpen = () => setOpen(!isOpen)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
+  const [hasItems, quantity] = useQuantity()
+
+  /* replace this with data from graphql */
+  const menuItems = [
+    { id: 1, name: "Supplements", link: "/collections/supplements" },
+    { id: 2, name: "Gear", link: "/collections/gear" },
+  ]
+
   const data = useStaticQuery(graphql`
     query {
       logo: file(relativePath: { eq: "logo-white-no-mark.jpg" }) {
@@ -29,7 +37,6 @@ const Header = () => {
       }
     }
   `)
-  const [hasItems, quantity] = useQuantity()
 
   return (
     <header>
@@ -40,12 +47,6 @@ const Header = () => {
           </Link>
         </div>
         <div>
-          <button onClick={toggleOpen} type="button" className="text-white p-2 rounded hover:bg-gray-700 focus:outline-none">
-            <svg className="h-6 w-6 fill-current" viewBox="0 0 24 24">
-              {isOpen && <CloseSvgPath />}
-              {!isOpen && <HamburgerSvgPath />}
-            </svg>
-          </button>
           <Link to="/cart">
             <button type="button" className="text-white p-2 rounded hover:bg-gray-700 focus:outline-none">
               <svg className="h-6 w-6 fill-current" viewBox="0 0 24 24">
@@ -56,33 +57,16 @@ const Header = () => {
               )}
             </button>
           </Link>
+          <button onClick={() => toggleMenu()} type="button" className="text-white p-2 rounded hover:bg-gray-700 focus:outline-none">
+            <svg className="h-6 w-6 fill-current" viewBox="0 0 24 24">
+              <HamburgerSvgPath />
+            </svg>
+          </button>
         </div>
       </div>
-      <div className={`px-2 pt-2 pb-4 ${isOpen ? "block" : "hidden"}`}>
-        <Link to="/collections/supplements" className="block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800">
-          Supplements
-        </Link>
-        <Link to="/collections/gear" className="block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800">
-          Gear
-        </Link>
-      </div>
+      <OffCanvasMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} menuItems={menuItems} />
     </header>
   )
 }
 
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
-
-Header.defaultProps = {
-  siteTitle: ``,
-}
-
 export default Header
-
-/*
-<Link to="/cart">
-Cart
-{hasItems && <span>{quantity}</span>}
-</Link>
-*/
