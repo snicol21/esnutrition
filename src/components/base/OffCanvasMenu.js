@@ -13,7 +13,7 @@ const OffCanvasMenu = ({ isMenuOpen, toggleMenu, menuItems = [], className = "" 
       `}
     >
       <div className="flex justify-end w-full">
-        <button onClick={() => closeMenu()} type="button" className="text-black p-2 rounded hover:bg-gray-300 focus:outline-none">
+        <button onClick={() => closeMenu()} type="button" className="text-black p-2 rounded hover:bg-gray-400 focus:outline-none">
           <svg className="h-6 w-6 fill-current" viewBox="0 0 24 24">
             <CloseSvgPath />
           </svg>

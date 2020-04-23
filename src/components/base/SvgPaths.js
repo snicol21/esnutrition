@@ -4,13 +4,13 @@ export const CloseSvgPath = () => {
   return (
     <path
       fillRule="evenodd"
-      d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"
+      d="M12 11.293l10.293-10.293.707.707-10.293 10.293 10.293 10.293-.707.707-10.293-10.293-10.293 10.293-.707-.707 10.293-10.293-10.293-10.293.707-.707 10.293 10.293z"
     />
   )
 }
 
 export const HamburgerSvgPath = () => {
-  return <path fillRule="evenodd" d="M24 6h-24v-4h24v4zm0 4h-24v4h24v-4zm0 8h-24v4h24v-4z" />
+  return <path fillRule="evenodd" d="M24 19h-24v-1h24v1zm0-6h-24v-1h24v1zm0-6h-24v-1h24v1z" />
 }
 
 export const ShoppingCartSvgPath = () => {
