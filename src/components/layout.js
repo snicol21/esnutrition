@@ -19,7 +19,7 @@ const Layout = ({ children }) => {
         `}
         render={data => (
           <>
-            <div className="bg-black text-white leading-normal tracking-normal max-w-full overflow-x-hidden">
+            <div className="bg-black text-white leading-normal tracking-normal min-w-screen min-h-screen overflow-x-hidden">
               <Header siteTitle={data.site.siteMetadata.title} />
               {/* <div>
                 {children}
