@@ -1,10 +1,15 @@
-import React, { useEffect, useRef } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { Link } from "gatsby"
 import { CloseSvgPath } from "./SvgPaths"
 import Overlay from "./Overlay"
 
 const OffCanvasMenu = ({ isMenuOpen, toggleMenu, menuItems = [], className = "" }) => {
-  const closeMenu = () => toggleMenu()
+  const closeMenu = () => {
+    document.getElementById("offCanvasMenu").classList.add("slideOutRight")
+    setTimeout(() => {
+      toggleMenu()
+    }, 500)
+  }
   const node = useRef()
 
   const handleClickOutside = e => {
@@ -25,16 +30,17 @@ const OffCanvasMenu = ({ isMenuOpen, toggleMenu, menuItems = [], className = "" 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside)
     }
-  }, [isMenuOpen])
+  })
 
   return (
     <>
       <div
+        id="offCanvasMenu"
         ref={node}
         className={`
-        ${isMenuOpen ? "translate-x-0" : "translate-x-full"}
+        ${isMenuOpen ? "slideInRight translate-x-0" : "translate-x-full"}
         ${className}
-        fixed z-40 top-0 right-0 h-full w-4/5 text-black bg-white max-w-sm px-4 py-6 overflow-auto transform
+        animated faster fixed z-40 top-0 right-0 h-full w-4/5 text-black bg-white max-w-sm px-4 py-6 overflow-auto transform
       `}
       >
         <div className="flex justify-end w-full">
@@ -52,7 +58,7 @@ const OffCanvasMenu = ({ isMenuOpen, toggleMenu, menuItems = [], className = "" 
           ))}
         </ul>
       </div>
-      <Overlay isVisible={isMenuOpen} />
+      {isMenuOpen && <Overlay />}
     </>
   )
 }
