@@ -57,7 +57,7 @@ const Header = () => {
               )}
             </button>
           </Link>
-          <button onClick={() => toggleMenu()} type="button" className="text-white p-2 rounded hover:bg-gray-700 focus:outline-none">
+          <button disabled={isMenuOpen} onClick={() => toggleMenu()} type="button" className="text-white p-2 rounded hover:bg-gray-700 focus:outline-none">
             <svg className="h-6 w-6 fill-current" viewBox="0 0 24 24">
               <HamburgerSvgPath />
             </svg>
