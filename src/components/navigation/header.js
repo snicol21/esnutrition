@@ -27,11 +27,22 @@ const Header = () => {
   ]
 
   const data = useStaticQuery(graphql`
-    query {
+    {
       logo: file(relativePath: { eq: "logo-white-no-mark.jpg" }) {
         childImageSharp {
           fixed(height: 30) {
             ...GatsbyImageSharpFixed_withWebp_noBase64
+          }
+        }
+      }
+      collections: allSitePage(filter: { path: { regex: "/collections/" } }) {
+        edges {
+          node {
+            path
+            context {
+              handle
+              title
+            }
           }
         }
       }

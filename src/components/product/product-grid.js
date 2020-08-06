@@ -9,7 +9,7 @@ const ProductGrid = () => {
   } = useContext(StoreContext)
   const { allShopifyProduct } = useStaticQuery(
     graphql`
-      query {
+      {
         allShopifyProduct(sort: { fields: [createdAt], order: DESC }) {
           edges {
             node {
@@ -50,7 +50,7 @@ const ProductGrid = () => {
       {allShopifyProduct.edges ? (
         allShopifyProduct.edges.map(({ node: { id, handle, title, images: [firstImage], variants: [firstVariant] } }) => (
           <div key={id}>
-            <Link to={`/product/${handle}/`}>
+            <Link to={`/products/${handle}/`}>
               {firstImage && firstImage.localFile && <Img fluid={firstImage.localFile.childImageSharp.fluid} alt={handle} />}
             </Link>
             <div>{title}</div>

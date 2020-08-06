@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
     <ContextProvider>
       <StaticQuery
         query={graphql`
-          query SiteTitleQuery {
+          {
             site {
               siteMetadata {
                 title
@@ -21,14 +21,14 @@ const Layout = ({ children }) => {
           <>
             <div className="bg-black text-white leading-normal tracking-normal min-w-screen min-h-screen overflow-x-hidden">
               <Header siteTitle={data.site.siteMetadata.title} />
-              {/* <div>
+              <div>
                 {children}
                 <footer>
                   © {new Date().getFullYear()}, Built with
                   {` `}
                   <a href="https://www.gatsbyjs.org">Gatsby</a>
                 </footer>
-              </div> */}
+              </div>
             </div>
           </>
         )}

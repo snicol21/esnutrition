@@ -1,28 +1,65 @@
 const path = require(`path`)
 
-exports.createPages = ({ graphql, actions }) => {
+exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
-  return graphql(`
+  const collectionTemplate = path.resolve("src/templates/collection-template.js")
+  const productTemplate = path.resolve("src/templates/product-template.js")
+
+  const query = await graphql(`
     {
-      allShopifyProduct {
+      allShopifyCollection(filter: { handle: { ne: "frontpage" } }) {
         edges {
           node {
             handle
+            title
+            products {
+              tags
+              handle
+              title
+            }
           }
         }
       }
     }
-  `).then(result => {
-    result.data.allShopifyProduct.edges.forEach(({ node }) => {
+  `)
+
+  if (query.errors) {
+    reporter.panicOnBuild("Error on createPages")
+  }
+
+  query.data.allShopifyCollection.edges.forEach(({ node }, index) => {
+    // page for each of the base collections
+    createPage({
+      path: `/collections/${node.handle}/`,
+      component: collectionTemplate,
+      context: {
+        handle: node.handle,
+        title: node.title,
+      },
+    })
+    let tags = new Set()
+    // page for each of the products
+    node.products.forEach(product => {
       createPage({
-        path: `/product/${node.handle}/`,
-        component: path.resolve(`./src/templates/product-template.js`),
+        path: `/products/${product.handle}`,
+        component: productTemplate,
         context: {
-          // Data passed to context is available
-          // in page queries as GraphQL variables.
-          handle: node.handle,
+          handle: product.handle,
+          title: product.title,
         },
       })
+      product.tags.forEach(tag => tags.add(tag))
     })
+    // page for each of the sub-collections (tags)
+    for (let tag of tags.keys()) {
+      createPage({
+        path: `/collections/${node.handle}/${tag.toLowerCase()}`,
+        component: collectionTemplate,
+        context: {
+          handle: `${node.handle}__${tag.toLowerCase()}`,
+          title: tag,
+        },
+      })
+    }
   })
 }

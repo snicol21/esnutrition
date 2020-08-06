@@ -1,13 +1,25 @@
-import React, { useEffect, useRef } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { Link } from "gatsby"
 import { CloseSvgPath } from "./SvgPaths"
 import Overlay from "./Overlay"
 
 const OffCanvasMenu = ({ isMenuOpen, toggleMenu, menuItems = [], className = "" }) => {
+  const [isMenuClosing, setIsMenuClosing] = useState(false)
+
+  const hideBodyScroll = hide => {
+    if (typeof document !== `undefined`) {
+      const setOverFlowY = value => (document.getElementsByTagName("body")[0].style.overflowY = value)
+      hide ? setOverFlowY("hidden") : setOverFlowY("auto")
+    }
+  }
+
   const closeMenu = () => {
-    document.getElementById("offCanvasMenu").classList.add("slideOutRight")
+    document.getElementById("offCanvasMenu").classList.add("animate__slideOutRight")
+    setIsMenuClosing(true)
+    hideBodyScroll(false)
     setTimeout(() => {
       toggleMenu()
+      setIsMenuClosing(false)
     }, 500)
   }
   const node = useRef()
@@ -38,9 +50,9 @@ const OffCanvasMenu = ({ isMenuOpen, toggleMenu, menuItems = [], className = "" 
         id="offCanvasMenu"
         ref={node}
         className={`
-        ${isMenuOpen ? "slideInRight translate-x-0" : "translate-x-full"}
+        ${isMenuOpen ? "animate__slideInRight translate-x-0" : "translate-x-full"}
         ${className}
-        animated faster fixed z-40 top-0 right-0 h-full w-4/5 text-black bg-white max-w-sm px-4 py-6 overflow-auto transform
+        animate__animated animate__faster fixed z-40 top-0 right-0 h-full w-4/5 text-black bg-white max-w-sm px-4 py-6 overflow-auto transform
       `}
       >
         <div className="flex justify-end w-full">
@@ -58,7 +70,7 @@ const OffCanvasMenu = ({ isMenuOpen, toggleMenu, menuItems = [], className = "" 
           ))}
         </ul>
       </div>
-      {isMenuOpen && <Overlay />}
+      {isMenuOpen && !isMenuClosing && <Overlay />}
     </>
   )
 }
