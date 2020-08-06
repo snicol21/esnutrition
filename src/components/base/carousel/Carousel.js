@@ -1,11 +1,12 @@
 import React from "react"
 import { useCarousel } from "./useCarousel"
 
-export const CarouselContainer = ({ children, slidesPresented = 1, interval = 5000 }) => {
+// https://github.com/FlorianRappl/react-carousel-hook-example/blob/master/src/useCarousel.ts
+export const CarouselContainer = ({ children, slidesPresented = 1, interval = 5000, isSwipeable = true }) => {
   const slides = React.Children.toArray(children)
   const length = slides.length
   const numActive = Math.min(length, slidesPresented)
-  const [active, setActive, handlers, style] = useCarousel(length, interval, { slidesPresented: numActive })
+  const [active, setActive, handlers, style] = useCarousel(length, interval, { slidesPresented: numActive, isSwipeable })
   const beforeIndices = makeIndices(slides.length - 1, -1, numActive)
   const afterIndices = makeIndices(0, +1, numActive)
 

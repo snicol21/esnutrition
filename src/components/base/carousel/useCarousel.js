@@ -54,7 +54,7 @@ function swiped(delta, dispatch, length, dir, container) {
 }
 
 export function useCarousel(length, interval, options = {}) {
-  const { slidesPresented = 1 } = options
+  const { slidesPresented = 1, isSwipeable = true } = options
   const shadowSlides = 2 * slidesPresented
   const n = Math.max(1, Math.min(slidesPresented, length))
   const totalWidth = 100 / n
@@ -116,5 +116,5 @@ export function useCarousel(length, interval, options = {}) {
     }
   }
 
-  return [state.active, n => dispatch({ type: "jump", desired: n }), handlers, style]
+  return [state.active, n => dispatch({ type: "jump", desired: n }), isSwipeable ? handlers : {}, style]
 }

@@ -21,10 +21,8 @@ const HomeSplash = () => {
     }
   `)
 
-  // const slides = carouselImages.edges.map(({ node: { id, childImageSharp } }) => <Img key={id} fluid={childImageSharp.fluid} className="home-carousel" />)
-
   return (
-    <CarouselContainer>
+    <CarouselContainer isSwipeable={false}>
       {carouselImages.edges.map(({ node: { id, childImageSharp } }) => (
         <CarouselChild>
           <Img key={id} fluid={childImageSharp.fluid} className="home-carousel" draggable={false} />
