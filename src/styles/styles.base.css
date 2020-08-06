@@ -1,5 +1,5 @@
-@tailwind base;
 @import "./fonts/fonts.css";
+@tailwind base;
 
 button {
   touch-action: manipulation;

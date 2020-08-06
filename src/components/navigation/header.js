@@ -4,7 +4,7 @@ import Img from "gatsby-image"
 import { useStaticQuery, graphql } from "gatsby"
 import StoreContext from "../../context/store-context"
 import OffCanvasMenu from "../base/OffCanvasMenu"
-import { HamburgerSvgPath, ShoppingCartSvgPath } from "../base/SvgPaths"
+import Icon from "../base/Icon"
 
 const useQuantity = () => {
   const {
@@ -58,21 +58,17 @@ const Header = () => {
           </Link>
         </div>
         <div>
+          <button disabled={isMenuOpen} onClick={() => toggleMenu()} type="button" className="text-white p-2 rounded hover:bg-gray-700 focus:outline-none">
+            <Icon name="hamburger" className="h-6 w-6" />
+          </button>
           <Link to="/cart">
             <button type="button" className="text-white p-2 rounded hover:bg-gray-700 focus:outline-none">
-              <svg className="h-6 w-6 fill-current" viewBox="0 0 24 24">
-                <ShoppingCartSvgPath />
-              </svg>
+              <Icon name="shopping-cart" className="h-6 w-6" />
               {hasItems && (
                 <span className="absolute -mt-2 ml-2 text-sm bg-red-600 rounded-full font-bold h-6 w-6 flex items-center justify-center">{quantity}</span>
               )}
             </button>
           </Link>
-          <button disabled={isMenuOpen} onClick={() => toggleMenu()} type="button" className="text-white p-2 rounded hover:bg-gray-700 focus:outline-none">
-            <svg className="h-6 w-6 fill-current" viewBox="0 0 24 24">
-              <HamburgerSvgPath />
-            </svg>
-          </button>
         </div>
       </div>
       <OffCanvasMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} menuItems={menuItems} />
