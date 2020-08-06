@@ -4,7 +4,8 @@ import Img from "gatsby-image"
 import { useStaticQuery, graphql } from "gatsby"
 import StoreContext from "../../context/store-context"
 import OffCanvasMenu from "../base/OffCanvasMenu"
-import Icon from "../base/Icon"
+import HorizontalMenu from "../base/HorizontalMenu"
+import { ShoppingCartButton, HamburgerButton } from "../base/Button"
 
 const useQuantity = () => {
   const {
@@ -15,7 +16,7 @@ const useQuantity = () => {
   return [total !== 0, total]
 }
 
-const Header = () => {
+const Header = ({ classContainerName = "", className = "" }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen)
   const [hasItems, quantity] = useQuantity()
@@ -50,28 +51,31 @@ const Header = () => {
   `)
 
   return (
-    <header className="absolute z-50 w-full header-gradient">
-      <div className="flex items-center justify-between px-4 py-6 pb-24">
+    <header className={`${classContainerName}`}>
+      <div className={`${className}`}>
         <div className="flex items-center align-middle">
           <Link to="/" className="flex items-center mr-5">
             <Img loading="eager" fixed={data.logo.childImageSharp.fixed} />
           </Link>
         </div>
-        <div>
-          <button disabled={isMenuOpen} onClick={() => toggleMenu()} type="button" className="text-white p-2 rounded hover:bg-gray-700 focus:outline-none">
-            <Icon name="hamburger" className="h-6 w-6" />
-          </button>
+        <HorizontalMenu menuItems={menuItems} className="hidden md:visible md:flex" />
+        <div className="flex">
+          <HamburgerButton
+            disabled={isMenuOpen}
+            onClick={() => toggleMenu()}
+            classContainerName="md:hidden"
+            className="text-white p-2 rounded hover:bg-black hover:bg-opacity-25"
+          />
           <Link to="/cart">
-            <button type="button" className="text-white p-2 rounded hover:bg-gray-700 focus:outline-none">
-              <Icon name="shopping-cart" className="h-6 w-6" />
+            <ShoppingCartButton className="text-white p-2 rounded hover:bg-black hover:bg-opacity-25">
               {hasItems && (
                 <span className="absolute -mt-2 ml-2 text-sm bg-red-600 rounded-full font-bold h-6 w-6 flex items-center justify-center">{quantity}</span>
               )}
-            </button>
+            </ShoppingCartButton>
           </Link>
         </div>
       </div>
-      <OffCanvasMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} menuItems={menuItems} />
+      <OffCanvasMenu isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} menuItems={menuItems} className="md:hidden" />
     </header>
   )
 }

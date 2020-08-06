@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react"
 import { Link } from "gatsby"
 import Overlay from "./Overlay"
-import Icon from "./Icon"
+import { CloseButton } from "./Button"
 
 const OffCanvasMenu = ({ isMenuOpen, toggleMenu, menuItems = [], className = "" }) => {
   const [isMenuClosing, setIsMenuClosing] = useState(false)
@@ -54,9 +54,7 @@ const OffCanvasMenu = ({ isMenuOpen, toggleMenu, menuItems = [], className = "" 
       `}
       >
         <div className="flex justify-end w-full">
-          <button disabled={!isMenuOpen} onClick={() => closeMenu()} type="button" className="text-black p-2 rounded hover:bg-gray-400 focus:outline-none">
-            <Icon name="close" className="h-6 w-6" />
-          </button>
+          <CloseButton disabled={!isMenuOpen} onClick={() => closeMenu()} className="text-black p-2 rounded hover:bg-gray-300" />
         </div>
         <ul>
           {menuItems.map((item, key) => (
@@ -66,7 +64,7 @@ const OffCanvasMenu = ({ isMenuOpen, toggleMenu, menuItems = [], className = "" 
           ))}
         </ul>
       </div>
-      {isMenuOpen && !isMenuClosing && <Overlay />}
+      {isMenuOpen && !isMenuClosing && <Overlay className="md:hidden" />}
     </>
   )
 }
