@@ -1,6 +1,7 @@
 import React from "react"
 import Img from "gatsby-image"
 import { useStaticQuery, graphql } from "gatsby"
+import { CarouselContainer, CarouselChild } from "../base/carousel/Carousel"
 
 const HomeSplash = () => {
   const { carouselImages } = useStaticQuery(graphql`
@@ -20,18 +21,16 @@ const HomeSplash = () => {
     }
   `)
 
+  // const slides = carouselImages.edges.map(({ node: { id, childImageSharp } }) => <Img key={id} fluid={childImageSharp.fluid} className="home-carousel" />)
+
   return (
-    <div>
-      {carouselImages.edges ? (
-        carouselImages.edges.map(({ node: { id, childImageSharp } }) => (
-          <div key={id}>
-            <Img fluid={childImageSharp.fluid} className="home-carousel" />
-          </div>
-        ))
-      ) : (
-        <p>No Images found!</p>
-      )}
-    </div>
+    <CarouselContainer>
+      {carouselImages.edges.map(({ node: { id, childImageSharp } }) => (
+        <CarouselChild>
+          <Img key={id} fluid={childImageSharp.fluid} className="home-carousel" draggable={false} />
+        </CarouselChild>
+      ))}
+    </CarouselContainer>
   )
 }
 
