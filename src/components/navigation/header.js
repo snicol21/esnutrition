@@ -28,10 +28,10 @@ const Header = () => {
 
   const data = useStaticQuery(graphql`
     {
-      logo: file(relativePath: { eq: "logo-white-no-mark.jpg" }) {
+      logo: file(relativePath: { eq: "logo-white-no-mark.png" }) {
         childImageSharp {
           fixed(height: 30) {
-            ...GatsbyImageSharpFixed_withWebp_noBase64
+            ...GatsbyImageSharpFixed_noBase64
           }
         }
       }
@@ -50,8 +50,8 @@ const Header = () => {
   `)
 
   return (
-    <header>
-      <div className="flex items-center justify-between px-4 py-6">
+    <header className="absolute z-50 w-full header-gradient">
+      <div className="flex items-center justify-between px-4 py-6 pb-24">
         <div className="flex items-center align-middle">
           <Link to="/" className="flex items-center mr-5">
             <Img loading="eager" fixed={data.logo.childImageSharp.fixed} />
