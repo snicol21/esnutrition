@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react"
 import { Link } from "gatsby"
-import Overlay from "./Overlay"
-import { CloseButton } from "./Button"
+import Overlay from "../Overlay"
+import CloseButton from "../button/CloseButton"
 
 const OffCanvasMenu = ({ isMenuOpen, toggleMenu, menuItems = [], className = "" }) => {
   const [isMenuClosing, setIsMenuClosing] = useState(false)

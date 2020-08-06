@@ -3,9 +3,10 @@ import { Link } from "gatsby"
 import Img from "gatsby-image"
 import { useStaticQuery, graphql } from "gatsby"
 import StoreContext from "../../context/store-context"
-import OffCanvasMenu from "../base/OffCanvasMenu"
-import HorizontalMenu from "../base/HorizontalMenu"
-import { ShoppingCartButton, HamburgerButton } from "../base/Button"
+import OffCanvasMenu from "../base/menu/OffCanvasMenu"
+import HorizontalMenu from "../base/menu/HorizontalMenu"
+import HamburgerButton from "../base/button/HamburgerButton"
+import ShoppingCartButton from "../base/button/ShoppingCartButton"
 
 const useQuantity = () => {
   const {
